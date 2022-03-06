@@ -1,0 +1,50 @@
+syntax = "proto3";
+package blogapb;
+option go_package = "/blogapb";
+
+message Blog {
+    string id =1;
+    string author_id =2;
+    string title = 3;
+    string content = 4;
+}
+
+message BlogRequest{
+    Blog blog =1;
+}
+
+message Blogresponse{
+    Blog blog =1;
+}
+message GetBlogRequest {
+    string blog_id = 1;
+}
+
+message GetBlogResponse {
+    Blog blog = 1;
+}
+message UpdateBlogRequest{
+    Blog blog = 1;
+}
+message UpdateBlogResponse {
+    Blog blog =1;
+}
+message DeleteBlogRequest {
+    string blog_id = 1;
+}
+message DeleteBlogResponse {
+    string blog_id = 1;
+}
+message ListBlogRequest {
+}
+
+message ListBlogResponse {
+    Blog blog =1;
+}
+service BlogService {
+    rpc CreateBlog (BlogRequest) returns (Blogresponse){};
+    rpc GetBlog (GetBlogRequest) returns (GetBlogResponse);
+    rpc UpdateBlog (UpdateBlogRequest) returns (UpdateBlogResponse);
+    rpc DeleteBlog (DeleteBlogRequest) returns (DeleteBlogResponse);
+    rpc ListBlogs (ListBlogRequest) returns (stream ListBlogResponse);
+}
